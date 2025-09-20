@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Juego para mi amor 💖</title>
+  <style>
+    body {
+      font-family: "Comic Sans MS", cursive;
+      text-align: center;
+      background: pink;
+      padding: 20px;
+    }
+    h1 {
+      color: darkred;
+    }
+    .pantalla {
+      display: none;
+    }
+    .activo {
+      display: block;
+    }
+    .hearts {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 30px;
+    }
+    .heart {
+      font-size: 60px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .heart:hover {
+      transform: scale(1.2);
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background: red;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: darkred;
+    }
+    input {
+      padding: 5px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #aaa;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎮 Juego del Amor para Ti 💖</h1>
+
+  <!-- Nivel 1 -->
+  <div id="nivel1" class="pantalla activo">
+    <h2>✨ Nivel 1 ✨</h2>
+    <p>Encuentra el corazón verdadero 💖</p>
+    <div class="hearts">
+      <span class="heart" onclick="fallo()">💔</span>
+      <span class="heart" onclick="ganar(1)">❤</span>
+      <span class="heart" onclick="fallo()">💔</span>
+    </div>
+    <div id="mensaje1" style="display:none;">
+      <p>🌹 ¡Lo lograste! 🌹<br>
+      💌 Eres mi persona favorita en el mundo 💌</p>
+      <button onclick="siguienteNivel(2)">Ir al siguiente nivel ➡</button>
+    </div>
+  </div>
+
+  <!-- Nivel 2 -->
+  <div id="nivel2" class="pantalla">
+    <h2>✨ Nivel 2 ✨</h2>
+    <p>Responde la pregunta: <br><b>¿Quién es mi persona favorita?</b></p>
+    <button onclick="respuesta(2, 'correcto')">Tú ❤</button>
+    <button onclick="fallo()">Mi gato 🐱</button>
+    <button onclick="fallo()">Messi ⚽</button>
+    <div id="mensaje2" style="display:none;">
+      <p>💖 Correcto 💖<br>
+      Porque tú eres mi todo 💕</p>
+      <button onclick="siguienteNivel(3)">Ir al siguiente nivel ➡</button>
+    </div>
+  </div>
+
+  <!-- Nivel 3 -->
+  <div id="nivel3" class="pantalla">
+    <h2>✨ Nivel 3 ✨</h2>
+    <p>Escribe la palabra mágica que nos une: <br><b>(4 letras)</b></p>
+    <input type="text" id="respuesta3" placeholder="Escribe aquí">
+    <button onclick="checkNivel3()">Comprobar</button>
+    <div id="mensaje3" style="display:none;">
+      <p>💘 ¡Exacto! La palabra es AMOR 💘<br>
+      Y eso es lo que siento por ti cada día 🌹</p>
+      <button onclick="siguienteNivel(4)">Ir al siguiente nivel ➡</button>
+    </div>
+  </div>
+
+  <!-- Nivel 4 (final) -->
+  <div id="nivel4" class="pantalla">
+    <h2>🎉 Nivel Final 🎉</h2>
+    <p>¡Has llegado hasta el final, mi amor! 💖</p>
+    <h3>🌹 Mensaje final 🌹</h3>
+    <p>
+      Gracias por existir, por ser tú, por hacer mi vida más bonita. <br>
+      Este juego es solo un pequeño regalo para recordarte que <br>
+      <b>TE AMO con todo mi corazón ❤</b>
+    </p>
+    <h1>💞💞💞</h1>
+  </div>
+
+  <script>
+    function fallo() {
+      alert("Ups... intenta de nuevo 😅");
+    }
+
+    function ganar(nivel) {
+      document.getElementById("mensaje" + nivel).style.display = "block";
+    }
+
+    function respuesta(nivel, tipo) {
+      if (tipo === 'correcto') {
+        document.getElementById("mensaje" + nivel).style.display = "block";
+      } else {
+        fallo();
+      }
+    }
+
+    function checkNivel3() {
+      const valor = document.getElementById("respuesta3").value.trim().toLowerCase();
+      if (valor === "amor") {
+        document.getElementById("mensaje3").style.display = "block";
+      } else {
+        fallo();
+      }
+    }
+
+    function siguienteNivel(nivel) {
+      // Ocultar todas las pantallas
+      const pantallas = document.querySelectorAll(".pantalla");
+      pantallas.forEach(p => p.classList.remove("activo"));
+
+      // Mostrar la pantalla del nivel deseado
+      document.getElementById("nivel" + nivel).classList.add("activo");
+    }
+  </script>
+</body>
+</html>
